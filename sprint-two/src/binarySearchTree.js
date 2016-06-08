@@ -20,7 +20,6 @@ BinarySearchTree.prototype.insert = function(value){
 			this.left.insert(value)
 		}
 	}
-	console.log(this)
 }
 
 BinarySearchTree.prototype.contains = function(value){
