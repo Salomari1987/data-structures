@@ -13,7 +13,6 @@ HashTable.prototype.insert = function(k, v) {
   }
   this._storage[index].push([k, v])
   this._storage.set(index, this._storage[index])
-  console.log(this.count, "++")
   this.count++;
     if((this._limit - this.count) === 1){
   	this._limit *= 2
@@ -31,7 +30,6 @@ HashTable.prototype.retrieve = function(k) {
 HashTable.prototype.remove = function(k) {
   var index = getIndexBelowMaxForKey(k, this._limit);
   this._storage.set(index, undefined)
-  console.log(this.count, "--")
   this.count--;
   
   if(this.count < (this._limit/2)){
