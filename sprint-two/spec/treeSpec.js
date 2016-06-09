@@ -2,12 +2,13 @@ describe('tree', function() {
   var tree;
 
   beforeEach(function() {
-    tree = Tree();
+    tree = Tree(10);
   });
 
-  it('should have methods named "addChild" and "contains", and a property named "value"', function() {
+  it('should have methods named "addChild", "removeFromParent" and "contains", and a property named "value"', function() {
     expect(tree.addChild).to.be.a('function');
     expect(tree.contains).to.be.a('function');
+    expect(tree.removeFromParent).to.be.a('function');
     expect(tree.hasOwnProperty('value')).to.equal(true);
   });
 
@@ -39,6 +40,13 @@ describe('tree', function() {
     tree.children[1].addChild(8);
     expect(tree.contains(7)).to.equal(true);
     expect(tree.contains(8)).to.equal(true);
+  });
+
+  it('should which disassociates the tree with its parent (in both directions) when removeFromParent', function() {
+    tree.addChild(5)
+    tree.addChild(6)
+    tree.removeFromParent(6)
+    expect(tree.contains(6)).to.equal(false);
   });
 
 });
