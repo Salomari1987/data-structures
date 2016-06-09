@@ -40,6 +40,15 @@ treeMethods.removeFromParent = function(value){
 	}
 }
 
+treeMethods.traverse = function(callback) {
+	callback(this.value)
+	if(this.children.length > 0){
+		_.each(this.children, (element, i) => {
+			element.traverse(callback)
+		})
+	}
+}
+
 
 
 /*

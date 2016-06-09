@@ -5,10 +5,11 @@ describe('tree', function() {
     tree = Tree(10);
   });
 
-  it('should have methods named "addChild", "removeFromParent" and "contains", and a property named "value"', function() {
+  it('should have methods named "addChild", "removeFromParent", "traverse" and "contains", and a property named "value"', function() {
     expect(tree.addChild).to.be.a('function');
     expect(tree.contains).to.be.a('function');
     expect(tree.removeFromParent).to.be.a('function');
+    expect(tree.traverse).to.be.a('function');
     expect(tree.hasOwnProperty('value')).to.equal(true);
   });
 
@@ -47,6 +48,17 @@ describe('tree', function() {
     tree.addChild(6)
     tree.removeFromParent(6)
     expect(tree.contains(6)).to.equal(false);
+  });
+
+  it('should execute a callback on every value in a tree using "traverse"', function() {
+    var array = [];
+    var func = function(value) { array.push(value); };
+    tree.addChild(5);
+    tree.addChild(6);
+    tree.addChild(2);
+    tree.addChild(4);
+    tree.traverse(func)
+    expect(array).to.eql([10, 5, 6, 2, 4]);
   });
 
 });
