@@ -16,19 +16,11 @@ setPrototype.add = function(item) {
 };
 
 setPrototype.contains = function(item) {
-	if(this._storage[item] === item){
-		return true
-	}
-	return false
-	// return _.reduce(this._storage, (acc, element) => {
-	// 	item === element ? acc = true : 0; return acc
-	// }, false)
+	return !!this._storage[item]
 };
 
 setPrototype.remove = function(item) {
-	if(this.contains(item)){
 		delete this._storage[item]
-	}
 };
 
 /*
