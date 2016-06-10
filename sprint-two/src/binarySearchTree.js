@@ -24,7 +24,7 @@ BinarySearchTree.prototype.insert = function(value){
 
 BinarySearchTree.prototype.contains = function(value){
 	if(value === this.value){
-		return true
+		return this;
 	} else if (value > this.value){
 		while(true){
 			if(value === this.right){
@@ -59,6 +59,33 @@ BinarySearchTree.prototype.depthFirstLog = function(callback){
 		break;
 	}
 }
+
+BinarySearchTree.prototype.breadthFirstLog = function(args){
+	var callArray = [];
+	if (!args){
+		console.log(this.value);	
+		if (this.right){
+			callArray.push(this.right);
+			}
+		if (this.left){
+			callArray.push(this.left);
+		}
+		this.breadthFirstLog.call(this, callArray);
+	} else if (args.length>0){
+		for (var i = 0; i<args.length; i++){
+			console.log(args[i].value);
+			if (args[i].right){
+				callArray.push(args[i].right);
+			}
+			if (args[i].left){
+				callArray.push(args[i].left);
+			}
+		}
+		this.breadthFirstLog.call(this, callArray);
+	}
+	return true;
+}
+
 
 /*
  * Complexity: What is the time complexity of the above functions?
