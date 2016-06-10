@@ -60,20 +60,25 @@ BinarySearchTree.prototype.depthFirstLog = function(callback){
 	}
 }
 
-BinarySearchTree.prototype.breadthFirstLog = function(args){
-	var callArray = [];
-	if (!args){
-		console.log(this.value);	
+BinarySearchTree.prototype.breadthFirstLog = function(func){
+	 var callArray = [];
+	if (arguments[1] === undefined){
+		func(this.value);	
 		if (this.right){
 			callArray.push(this.right);
 			}
 		if (this.left){
 			callArray.push(this.left);
 		}
-		this.breadthFirstLog.call(this, callArray);
-	} else if (args.length>0){
+			console.log(arguments, "b")
+
+		this.breadthFirstLog.call(this, func, callArray);
+	} else {
+		func = arguments[0]
+		var args = arguments[1]
 		for (var i = 0; i<args.length; i++){
-			console.log(args[i].value);
+			func(args[i].value);
+			console.log(args[i].value)
 			if (args[i].right){
 				callArray.push(args[i].right);
 			}
@@ -81,9 +86,11 @@ BinarySearchTree.prototype.breadthFirstLog = function(args){
 				callArray.push(args[i].left);
 			}
 		}
-		this.breadthFirstLog.call(this, callArray);
+		if (callArray.length === 0){
+			return true;
+		}
+		this.breadthFirstLog.call(this, func, callArray);
 	}
-	return true;
 }
 
 
